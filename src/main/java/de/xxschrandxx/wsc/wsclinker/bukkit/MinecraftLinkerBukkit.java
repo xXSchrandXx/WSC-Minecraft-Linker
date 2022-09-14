@@ -10,7 +10,6 @@ import de.xxschrandxx.wsc.wscbridge.bukkit.MinecraftBridgeBukkit;
 import de.xxschrandxx.wsc.wscbridge.bukkit.api.ConfigurationBukkit;
 import de.xxschrandxx.wsc.wscbridge.bukkit.api.command.SenderBukkit;
 import de.xxschrandxx.wsc.wscbridge.core.IMinecraftBridgePlugin;
-import de.xxschrandxx.wsc.wscbridge.core.MinecraftBridgeVars;
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
 import de.xxschrandxx.wsc.wsclinker.bukkit.api.MinecraftLinkerBukkitAPI;
 import de.xxschrandxx.wsc.wsclinker.bukkit.commands.*;
@@ -50,11 +49,7 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
         this.api = new MinecraftLinkerBukkitAPI(
             urlSendCode,
             urlUpdateNames,
-            wsc.getConfiguration().getInt(MinecraftBridgeVars.Configuration.ID),
-            wsc.getConfiguration().getString(MinecraftBridgeVars.Configuration.User),
-            wsc.getConfiguration().getString(MinecraftBridgeVars.Configuration.Password),
-            getLogger(),
-            wsc.getConfiguration().getBoolean(MinecraftBridgeVars.Configuration.Debug)
+            wsc.getAPI()
         );
     }
     public MinecraftLinkerBukkitAPI getAPI() {

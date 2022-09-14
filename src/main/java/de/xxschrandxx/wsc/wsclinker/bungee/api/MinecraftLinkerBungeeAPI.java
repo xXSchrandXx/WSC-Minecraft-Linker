@@ -7,9 +7,9 @@ import java.net.URL;
 import java.net.UnknownServiceException;
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import de.xxschrandxx.wsc.wscbridge.bungee.api.MinecraftBridgeBungeeAPI;
+import de.xxschrandxx.wsc.wscbridge.core.api.MinecraftBridgeCoreAPI;
 import de.xxschrandxx.wsc.wscbridge.core.api.Response;
 import de.xxschrandxx.wsc.wsclinker.core.api.IMinecraftLinkerCoreAPI;
 import de.xxschrandxx.wsc.wsclinker.core.api.MinecraftLinkerCoreAPI;
@@ -19,8 +19,8 @@ public class MinecraftLinkerBungeeAPI extends MinecraftBridgeBungeeAPI implement
     protected final URL urlSendCode;
     protected final URL urlUpdateNames;
 
-    public MinecraftLinkerBungeeAPI(URL urlSendCode, URL urlUpdateNames, Integer id, String user, String password, Logger logger, Boolean debug) {
-        super(id, user, password, logger, debug);
+    public MinecraftLinkerBungeeAPI(URL urlSendCode, URL urlUpdateNames, MinecraftBridgeCoreAPI api) {
+        super(api.getID(), api.getAuth(), api.getLogger(), api.isDebugModeEnabled());
         this.urlSendCode = urlSendCode;
         this.urlUpdateNames = urlUpdateNames;
     }

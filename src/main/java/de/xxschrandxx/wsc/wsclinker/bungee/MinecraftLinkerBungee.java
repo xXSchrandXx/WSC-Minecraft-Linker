@@ -11,7 +11,6 @@ import de.xxschrandxx.wsc.wscbridge.bungee.MinecraftBridgeBungee;
 import de.xxschrandxx.wsc.wscbridge.bungee.api.ConfigurationBungee;
 import de.xxschrandxx.wsc.wscbridge.bungee.api.command.SenderBungee;
 import de.xxschrandxx.wsc.wscbridge.core.IMinecraftBridgePlugin;
-import de.xxschrandxx.wsc.wscbridge.core.MinecraftBridgeVars;
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
 import de.xxschrandxx.wsc.wsclinker.bungee.api.MinecraftLinkerBungeeAPI;
 import de.xxschrandxx.wsc.wsclinker.bungee.commands.WSCLinkerBungee;
@@ -55,11 +54,7 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
         this.api = new MinecraftLinkerBungeeAPI(
             urlSendCode,
             urlUpdateNames,
-            wsc.getConfiguration().getInt(MinecraftBridgeVars.Configuration.ID),
-            wsc.getConfiguration().getString(MinecraftBridgeVars.Configuration.User),
-            wsc.getConfiguration().getString(MinecraftBridgeVars.Configuration.Password),
-            getLogger(),
-            wsc.getConfiguration().getBoolean(MinecraftBridgeVars.Configuration.Debug)
+            wsc.getAPI()
         );
     }
 
