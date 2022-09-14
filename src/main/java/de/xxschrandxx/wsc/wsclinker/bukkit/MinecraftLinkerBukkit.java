@@ -49,6 +49,7 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
         this.api = new MinecraftLinkerBukkitAPI(
             urlSendCode,
             urlUpdateNames,
+            getLogger(),
             wsc.getAPI()
         );
     }

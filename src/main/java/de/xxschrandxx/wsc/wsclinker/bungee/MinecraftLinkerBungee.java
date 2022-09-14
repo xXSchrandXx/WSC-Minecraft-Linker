@@ -54,6 +54,7 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
         this.api = new MinecraftLinkerBungeeAPI(
             urlSendCode,
             urlUpdateNames,
+            getLogger(),
             wsc.getAPI()
         );
     }

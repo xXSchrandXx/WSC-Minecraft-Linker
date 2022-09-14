@@ -7,6 +7,7 @@ import java.net.URL;
 import java.net.UnknownServiceException;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import de.xxschrandxx.wsc.wscbridge.bukkit.api.MinecraftBridgeBukkitAPI;
 import de.xxschrandxx.wsc.wscbridge.core.api.MinecraftBridgeCoreAPI;
@@ -19,8 +20,8 @@ public class MinecraftLinkerBukkitAPI extends MinecraftBridgeBukkitAPI implement
     protected final URL urlSendCode;
     protected final URL urlUpdateNames;
 
-    public MinecraftLinkerBukkitAPI(URL urlSendCode, URL urlUpdateNames, MinecraftBridgeCoreAPI api) {
-        super(api.getID(), api.getAuth(), api.getLogger(), api.isDebugModeEnabled());
+    public MinecraftLinkerBukkitAPI(URL urlSendCode, URL urlUpdateNames, Logger logger, MinecraftBridgeCoreAPI api) {
+        super(api.getID(), api.getAuth(), logger, api.isDebugModeEnabled());
         this.urlSendCode = urlSendCode;
         this.urlUpdateNames = urlUpdateNames;
     }
