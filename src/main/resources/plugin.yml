@@ -1,0 +1,14 @@
+name: ${project.artifactId}-bukkit
+main: ${project.groupId}.${project.artifactId}.bukkit.MinecraftLinkerBukkit
+version: ${project.version}
+author: xXSchrandXx
+description: WSC-Minecraft-Linker
+api-version: 1.13
+load: STARTUP
+depend: [wscbridge-bukkit]
+
+commands:
+  wsclinker:
+    description: Command for WSC-Minecraft-Linker.
+    aliases:
+    - wsclinkerbukkit

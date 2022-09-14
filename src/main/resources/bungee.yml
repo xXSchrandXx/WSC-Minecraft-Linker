@@ -1,0 +1,12 @@
+name: ${project.artifactId}-bungee
+main: ${project.groupId}.${project.artifactId}.bungee.MinecraftLinkerBungee
+version: ${project.version}
+author: xXSchrandXx
+description: WSC-Minecraft-Linker
+depends: [wscbridge-bungee]
+
+commands:
+  wsclinker:
+    description: Command for WSC-Minecraft-Linker.
+    aliases:
+    - wsclinkerbungee
