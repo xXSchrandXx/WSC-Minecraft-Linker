@@ -85,9 +85,12 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
         getLogger().log(Level.INFO, "Loading Commands.");
         getCommand("wsclinker").setExecutor(new WSCLinkerBukkit());
 
+        if (!getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.updateNamesEnabled)) {
+            return;
+        }
         // load runnable
         getLogger().log(Level.INFO, "Loading Runnables.");
-        int minutes = 5 * 60 * 1000;
+        Integer minutes = getConfiguration().getInt(MinecraftLinkerVars.Configuration.updateNamesInterval) * 60 * 20;
         getServer().getScheduler().runTaskTimerAsynchronously(getInstance(), new UpdateNamesRunnable(instance), minutes, minutes);
     }
 

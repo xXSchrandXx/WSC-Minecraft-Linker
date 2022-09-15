@@ -91,9 +91,13 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
         getLogger().log(Level.INFO, "Loading Commands.");
         getProxy().getPluginManager().registerCommand(getInstance(), new WSCLinkerBungee("wsclinker"));
 
+        if (!getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.updateNamesEnabled)) {
+            return;
+        }
         // load runnable
         getLogger().log(Level.INFO, "Loading Runnables.");
-        getProxy().getScheduler().schedule(getInstance(), new UpdateNamesRunnable(instance), 5, TimeUnit.MINUTES);
+        Integer minutes = getConfiguration().getInt(MinecraftLinkerVars.Configuration.updateNamesInterval);
+        getProxy().getScheduler().schedule(getInstance(), new UpdateNamesRunnable(instance), minutes, TimeUnit.MINUTES);
     }
 
     @Override

@@ -16,6 +16,10 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
         public static final String urlSendCode ="url.sendCode";
         // url.updateNames
         public static final String urlUpdateNames ="url.updateNames";
+        // updateNames.enabled
+        public static final String updateNamesEnabled = "updateNames.enabled";
+        // updateNames.interval
+        public static final String updateNamesInterval = "updateNames.interval";
 
         // permission
         // permission.command.wsclinker
@@ -68,6 +72,11 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
         public static final String urlSendCode = "https://example.domain/index.php?minecraft-linker-code//";
         // url.updateNames
         public static final String urlUpdateNames = "https://example.domain/index.php?minecraft-linker-update-name/";
+        // updateNames.enabled
+        public static final Boolean updateNamesEnabled = true;
+        // updateNames.interval
+        public static final Integer updateNamesInterval = 5;
+
 
         // permission
         // permission.command.wsclinker
