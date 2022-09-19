@@ -80,6 +80,8 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
         getLogger().log(Level.INFO, "Loading Listener.");
         getServer().getPluginManager().registerEvents(new WSCBridgeConfigReloadListenerBukkit(), getInstance());
         getServer().getPluginManager().registerEvents(new WSCBridgePluginReloadListenerBukkit(), getInstance());
+        getServer().getPluginManager().registerEvents(new AddModuleListenerBukkit(), getInstance());
+        getServer().getPluginManager().registerEvents(new AddModuleListenerBukkit(), getInstance());
 
         // Load commands
         getLogger().log(Level.INFO, "Loading Commands.");

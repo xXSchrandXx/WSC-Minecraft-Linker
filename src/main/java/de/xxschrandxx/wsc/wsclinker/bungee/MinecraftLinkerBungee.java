@@ -14,6 +14,7 @@ import de.xxschrandxx.wsc.wscbridge.core.IMinecraftBridgePlugin;
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
 import de.xxschrandxx.wsc.wsclinker.bungee.api.MinecraftLinkerBungeeAPI;
 import de.xxschrandxx.wsc.wsclinker.bungee.commands.WSCLinkerBungee;
+import de.xxschrandxx.wsc.wsclinker.bungee.listener.AddModuleListenerBungee;
 import de.xxschrandxx.wsc.wsclinker.bungee.listener.WSCBridgeConfigReloadListenerBungee;
 import de.xxschrandxx.wsc.wsclinker.bungee.listener.WSCBridgePluginReloadListenerBungee;
 import de.xxschrandxx.wsc.wsclinker.core.MinecraftLinkerVars;
@@ -86,6 +87,7 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
         getLogger().log(Level.INFO, "Loading Listener.");
         getProxy().getPluginManager().registerListener(getInstance(), new WSCBridgeConfigReloadListenerBungee());
         getProxy().getPluginManager().registerListener(getInstance(), new WSCBridgePluginReloadListenerBungee());
+        getProxy().getPluginManager().registerListener(getInstance(), new AddModuleListenerBungee());
 
         // load commands
         getLogger().log(Level.INFO, "Loading Commands.");
