@@ -31,17 +31,14 @@ public class UnlinkedMessageRunnable  implements Runnable {
                 instance.getAPI().log("Could not get linked UUIDs.", e);
             }
         }
-        if (linked.isEmpty()) {
-            if (instance.getAPI().isDebugModeEnabled()) {
-                instance.getAPI().log("Linked UUIDs empty.");
-            }
-            return;
-        }
         for (ISender<?> sender : players) {
             if (linked.contains(sender.getUniqueId())) {
                 continue;
             }
-            sender.send(MinecraftLinkerVars.Configuration.LangUnlinkedMessage);
+            String message = instance.getConfiguration().getString(MinecraftLinkerVars.Configuration.LangUnlinkedMessageText);
+            String hover = instance.getConfiguration().getString(MinecraftLinkerVars.Configuration.LangUnlinkedMessageHover);
+            String click = instance.getConfiguration().getString(MinecraftLinkerVars.Configuration.LangUnlinkedMessageUrl);
+            sender.sendMessage(message, hover, click);
         }
     }
 }

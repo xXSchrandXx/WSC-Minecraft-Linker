@@ -18,6 +18,7 @@ import de.xxschrandxx.wsc.wsclinker.bungee.listener.AddModuleListenerBungee;
 import de.xxschrandxx.wsc.wsclinker.bungee.listener.WSCBridgeConfigReloadListenerBungee;
 import de.xxschrandxx.wsc.wsclinker.bungee.listener.WSCBridgePluginReloadListenerBungee;
 import de.xxschrandxx.wsc.wsclinker.core.MinecraftLinkerVars;
+import de.xxschrandxx.wsc.wsclinker.core.runnable.UnlinkedMessageRunnable;
 import de.xxschrandxx.wsc.wsclinker.core.runnable.UpdateNamesRunnable;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.ConfigurationProvider;
@@ -119,7 +120,7 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
         }
         if (getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.unlinkedMessageEnabled)) {
             Integer unlinkedMessageInterval = getConfiguration().getInt(MinecraftLinkerVars.Configuration.unlinkedMessageInterval);
-            getProxy().getScheduler().schedule(getInstance(), new UpdateNamesRunnable(instance), unlinkedMessageInterval, unlinkedMessageInterval, TimeUnit.MINUTES);
+            getProxy().getScheduler().schedule(getInstance(), new UnlinkedMessageRunnable(instance), unlinkedMessageInterval, unlinkedMessageInterval, TimeUnit.MINUTES);
         }
     }
 

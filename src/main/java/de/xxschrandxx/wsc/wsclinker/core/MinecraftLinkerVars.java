@@ -73,8 +73,12 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
         public static final String LangCmdAdminSuccessText = "language.command.admin.success.text";
         // language.command.admin.success.hover
         public static final String LangCmdAdminSuccessHover = "language.command.admin.success.hover";
-        // language.unlinkedMessage
-        public static final String LangUnlinkedMessage = "language.unlinkedMessage";
+        // language.unlinkedMessage.text
+        public static final String LangUnlinkedMessageText = "language.unlinkedMessage.text";
+        // language.unlinkedMessage.hover
+        public static final String LangUnlinkedMessageHover = "language.unlinkedMessage.hover";
+        // language.unlinkedMessage.url
+        public static final String LangUnlinkedMessageUrl = "language.unlinkedMessage.url";
     }
     // Default values
     public static final class defaults {
@@ -84,9 +88,9 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
         // url.updateNames
         public static final String urlUpdateNames = "https://example.domain/index.php?minecraft-linker-update-name/";
         // url.getLinked
-        public static final String urlGetLinked = "https://example.domain/index.php?minecraft-linker-get-linked/"; // TODO
+        public static final String urlGetLinked = "https://example.domain/index.php?minecraft-linker-get-linked/";
         // url.getUnlinked
-        public static final String urlGetUnlinked = "https://example.domain/index.php?minecraft-linker-get-unlinked/"; // TODO
+        public static final String urlGetUnlinked = "https://example.domain/index.php?minecraft-linker-get-unlinked/";
 
         // updateNames.enabled
         public static final Boolean updateNamesEnabled = true;
@@ -141,7 +145,11 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
         public static final String LangCmdAdminSuccessText = "&8[&6WSC-Linker&8]&7 Code for %name% is %code%.";
         // language.command.admin.success.hover
         public static final String LangCmdAdminSuccessHover = "Click to copy code.";
-        // language.unlinkedMessage
-        public static final String LangUnlinkedMessage = "&8[&6WSC-Linker&8]&7 Link your Minecraft-Account: https://domain.example/index.php?minecraft-user-add/";
+        // language.unlinkedMessage.text
+        public static final String LangUnlinkedMessageText = "&8[&6WSC-Linker&8]&7 Link your Minecraft-Account &bhere&7.";
+        // language.unlinkedMessage.hover
+        public static final String LangUnlinkedMessageHover = "Click to open url.";
+        // language.unlinkedMessage.url
+        public static final String LangUnlinkedMessageUrl = "https://domain.example/index.php?minecraft-user-add/";
     }
 }

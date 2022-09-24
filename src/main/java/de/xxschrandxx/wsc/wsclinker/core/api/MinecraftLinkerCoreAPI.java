@@ -7,9 +7,8 @@ import java.net.URL;
 import java.net.UnknownServiceException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.IllegalFormatException;
 import java.util.UUID;
-
-import com.google.gson.internal.LinkedTreeMap;
 
 import de.xxschrandxx.wsc.wscbridge.core.api.MinecraftBridgeCoreAPI;
 import de.xxschrandxx.wsc.wscbridge.core.api.Response;
@@ -28,6 +27,42 @@ public class MinecraftLinkerCoreAPI {
         Response<String, Object> request = api.requestObject(url, postData);
         return request;
     }
+    public static ArrayList<UUID> getUnlinkedUUIDs(MinecraftBridgeCoreAPI api, URL url) throws MalformedURLException, UnknownServiceException, SocketTimeoutException, IOException {
+        Response<String, Object> response = api.getObject(url);
+        ArrayList<UUID> uuids = new ArrayList<UUID>();
+        if (response.getResponse() == null) {
+            if (api.isDebugModeEnabled()) {
+                api.log("Response is null");
+            }
+            return uuids;
+        }
+        if (!response.getResponse().containsKey("uuids")) {
+            if (api.isDebugModeEnabled()) {
+                api.log("Response does not contain key 'uuids'.");
+            }
+            return uuids;
+        }
+        Object uuidsObject = response.get("uuids");
+        if (!(uuidsObject instanceof ArrayList)) {
+            if (api.isDebugModeEnabled()) {
+                api.log("'uuids' is no ArrayList.");
+            }
+            return uuids;
+        }
+        ArrayList<String> uuidsArray = (ArrayList<String>) uuidsObject;
+        for (String uuidString : uuidsArray) {
+            try {
+                UUID uuid = UUID.fromString(uuidString);
+                uuids.add(uuid);
+            }
+            catch (IllegalFormatException e) {
+                if (api.isDebugModeEnabled()) {
+                    api.log("UUID '" + uuidString + " is no UUID, skipping it.", e);
+                }
+            }
+        }
+        return uuids;
+    }
     public static ArrayList<UUID> getLinkedUUIDs(MinecraftBridgeCoreAPI api, URL url) throws MalformedURLException, UnknownServiceException, SocketTimeoutException, IOException {
         Response<String, Object> response = api.getObject(url);
         ArrayList<UUID> uuids = new ArrayList<UUID>();
@@ -44,14 +79,24 @@ public class MinecraftLinkerCoreAPI {
             return uuids;
         }
         Object uuidsObject = response.get("uuids");
-        api.log(uuidsObject.getClass().getCanonicalName());
-        if (!(uuidsObject instanceof LinkedTreeMap)) {
+        if (!(uuidsObject instanceof ArrayList)) {
             if (api.isDebugModeEnabled()) {
-                api.log("'uuids' is no LinkedTreeMap.");
+                api.log("'uuids' is no ArrayList.");
             }
             return uuids;
         }
-        LinkedTreeMap uuidsTreeMap = (LinkedTreeMap) uuidsObject;
+        ArrayList<String> uuidsArray = (ArrayList<String>) uuidsObject;
+        for (String uuidString : uuidsArray) {
+            try {
+                UUID uuid = UUID.fromString(uuidString);
+                uuids.add(uuid);
+            }
+            catch (IllegalFormatException e) {
+                if (api.isDebugModeEnabled()) {
+                    api.log("UUID '" + uuidString + " is no UUID, skipping it.", e);
+                }
+            }
+        }
         return uuids;
     }
 }

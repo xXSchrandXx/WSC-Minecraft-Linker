@@ -40,7 +40,7 @@ public class MinecraftLinkerBukkitAPI extends MinecraftBridgeBukkitAPI implement
     }
 
     public ArrayList<UUID> getUnlinkedUUIDs() throws MalformedURLException, UnknownServiceException, SocketTimeoutException, IOException {
-        return null;
+        return MinecraftLinkerCoreAPI.getUnlinkedUUIDs(this, urlGetUnlinked);
     }
 
     public ArrayList<UUID> getLinkedUUIDs() throws MalformedURLException, UnknownServiceException, SocketTimeoutException, IOException {
