@@ -51,10 +51,28 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
+        String urlGetLinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetLinked);
+        URL urlGetLinked;
+        try {
+            urlGetLinked = new URL(urlGetLinkedString);
+        } catch (MalformedURLException e) {
+            getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
+            return;
+        }
+        String urlGetUnlinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetUnlinked);
+        URL urlGetUnlinked;
+        try {
+            urlGetUnlinked = new URL(urlGetUnlinkedString);
+        } catch (MalformedURLException e) {
+            getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
+            return;
+        }
         MinecraftBridgeBungee wsc = MinecraftBridgeBungee.getInstance();
         this.api = new MinecraftLinkerBungeeAPI(
             urlSendCode,
             urlUpdateNames,
+            urlGetLinked,
+            urlGetUnlinked,
             getLogger(),
             wsc.getAPI()
         );
@@ -93,13 +111,16 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
         getLogger().log(Level.INFO, "Loading Commands.");
         getProxy().getPluginManager().registerCommand(getInstance(), new WSCLinkerBungee("wsclinker"));
 
-        if (!getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.updateNamesEnabled)) {
-            return;
-        }
         // load runnable
         getLogger().log(Level.INFO, "Loading Runnables.");
-        Integer minutes = getConfiguration().getInt(MinecraftLinkerVars.Configuration.updateNamesInterval);
-        getProxy().getScheduler().schedule(getInstance(), new UpdateNamesRunnable(instance), minutes, TimeUnit.MINUTES);
+        if (getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.updateNamesEnabled)) {
+            Integer updateNamesInterval = getConfiguration().getInt(MinecraftLinkerVars.Configuration.updateNamesInterval);
+            getProxy().getScheduler().schedule(getInstance(), new UpdateNamesRunnable(instance), updateNamesInterval, updateNamesInterval, TimeUnit.MINUTES);
+        }
+        if (getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.unlinkedMessageEnabled)) {
+            Integer unlinkedMessageInterval = getConfiguration().getInt(MinecraftLinkerVars.Configuration.unlinkedMessageInterval);
+            getProxy().getScheduler().schedule(getInstance(), new UpdateNamesRunnable(instance), unlinkedMessageInterval, unlinkedMessageInterval, TimeUnit.MINUTES);
+        }
     }
 
     @Override

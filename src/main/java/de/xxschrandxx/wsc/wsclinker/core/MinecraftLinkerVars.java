@@ -16,10 +16,19 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
         public static final String urlSendCode ="url.sendCode";
         // url.updateNames
         public static final String urlUpdateNames ="url.updateNames";
+        // url.getLinked
+        public static final String urlGetLinked ="url.getLinked";
+        // url.getUnlinked
+        public static final String urlGetUnlinked ="url.getUnlinked";
         // updateNames.enabled
         public static final String updateNamesEnabled = "updateNames.enabled";
         // updateNames.interval
         public static final String updateNamesInterval = "updateNames.interval";
+
+        // unlinkedMessage.enabled
+        public static final String unlinkedMessageEnabled = "unlinkedMessage.enabled";
+        // unlinkedMessage.interval
+        public static final String unlinkedMessageInterval = "unlinkedMessage.interval";
 
         // permission
         // permission.command.wsclinker
@@ -64,6 +73,8 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
         public static final String LangCmdAdminSuccessText = "language.command.admin.success.text";
         // language.command.admin.success.hover
         public static final String LangCmdAdminSuccessHover = "language.command.admin.success.hover";
+        // language.unlinkedMessage
+        public static final String LangUnlinkedMessage = "language.unlinkedMessage";
     }
     // Default values
     public static final class defaults {
@@ -72,11 +83,20 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
         public static final String urlSendCode = "https://example.domain/index.php?minecraft-linker-code//";
         // url.updateNames
         public static final String urlUpdateNames = "https://example.domain/index.php?minecraft-linker-update-name/";
+        // url.getLinked
+        public static final String urlGetLinked = "https://example.domain/index.php?minecraft-linker-get-linked/"; // TODO
+        // url.getUnlinked
+        public static final String urlGetUnlinked = "https://example.domain/index.php?minecraft-linker-get-unlinked/"; // TODO
+
         // updateNames.enabled
         public static final Boolean updateNamesEnabled = true;
         // updateNames.interval
         public static final Integer updateNamesInterval = 5;
 
+        // unlinkedMessage.enabled
+        public static final Boolean unlinkedMessageEnabled = true;
+        // unlinkedMessage.interval
+        public static final Integer unlinkedMessageInterval = 5;
 
         // permission
         // permission.command.wsclinker
@@ -121,5 +141,7 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
         public static final String LangCmdAdminSuccessText = "&8[&6WSC-Linker&8]&7 Code for %name% is %code%.";
         // language.command.admin.success.hover
         public static final String LangCmdAdminSuccessHover = "Click to copy code.";
+        // language.unlinkedMessage
+        public static final String LangUnlinkedMessage = "&8[&6WSC-Linker&8]&7 Link your Minecraft-Account: https://domain.example/index.php?minecraft-user-add/";
     }
 }

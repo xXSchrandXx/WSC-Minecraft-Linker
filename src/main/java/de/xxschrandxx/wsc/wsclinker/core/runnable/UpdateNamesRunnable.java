@@ -17,6 +17,12 @@ public class UpdateNamesRunnable implements Runnable {
     }
     public void run() {
         ArrayList<ISender<?>> players = instance.getAPI().getOnlineSender(instance);
+        if (players.isEmpty()) {
+            if (instance.getAPI().isDebugModeEnabled()) {
+                instance.getAPI().log("No players online. Skipping UpdateNames.");
+            }
+            return;
+        }
         HashMap<UUID, HashMap<String, String>> uuids = new HashMap<UUID, HashMap<String, String>>();
         for (ISender<?> sender : players) {
             HashMap<String, String> options = new HashMap<String, String>();

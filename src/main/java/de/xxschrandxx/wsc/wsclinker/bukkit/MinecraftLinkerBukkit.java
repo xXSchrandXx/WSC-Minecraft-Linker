@@ -15,6 +15,7 @@ import de.xxschrandxx.wsc.wsclinker.bukkit.api.MinecraftLinkerBukkitAPI;
 import de.xxschrandxx.wsc.wsclinker.bukkit.commands.*;
 import de.xxschrandxx.wsc.wsclinker.bukkit.listener.*;
 import de.xxschrandxx.wsc.wsclinker.core.MinecraftLinkerVars;
+import de.xxschrandxx.wsc.wsclinker.core.runnable.UnlinkedMessageRunnable;
 import de.xxschrandxx.wsc.wsclinker.core.runnable.UpdateNamesRunnable;
 
 public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridgePlugin<MinecraftLinkerBukkitAPI> {
@@ -45,10 +46,28 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
+        String urlGetLinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetLinked);
+        URL urlGetLinked;
+        try {
+            urlGetLinked = new URL(urlGetLinkedString);
+        } catch (MalformedURLException e) {
+            getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
+            return;
+        }
+        String urlGetUnlinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetUnlinked);
+        URL urlGetUnlinked;
+        try {
+            urlGetUnlinked = new URL(urlGetUnlinkedString);
+        } catch (MalformedURLException e) {
+            getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
+            return;
+        }
         MinecraftBridgeBukkit wsc = MinecraftBridgeBukkit.getInstance();
         this.api = new MinecraftLinkerBukkitAPI(
             urlSendCode,
             urlUpdateNames,
+            urlGetLinked,
+            urlGetUnlinked,
             getLogger(),
             wsc.getAPI()
         );
@@ -87,13 +106,16 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
         getLogger().log(Level.INFO, "Loading Commands.");
         getCommand("wsclinker").setExecutor(new WSCLinkerBukkit());
 
-        if (!getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.updateNamesEnabled)) {
-            return;
-        }
         // load runnable
         getLogger().log(Level.INFO, "Loading Runnables.");
-        Integer minutes = getConfiguration().getInt(MinecraftLinkerVars.Configuration.updateNamesInterval) * 60 * 20;
-        getServer().getScheduler().runTaskTimerAsynchronously(getInstance(), new UpdateNamesRunnable(instance), minutes, minutes);
+        if (getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.updateNamesEnabled)) {
+            Integer updateNamesInterval = getConfiguration().getInt(MinecraftLinkerVars.Configuration.updateNamesInterval) * 60 * 20;
+            getServer().getScheduler().runTaskTimerAsynchronously(getInstance(), new UpdateNamesRunnable(instance), updateNamesInterval, updateNamesInterval);
+        }
+        if (getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.unlinkedMessageEnabled)) {
+            Integer unlinkedMessageInterval = getConfiguration().getInt(MinecraftLinkerVars.Configuration.unlinkedMessageInterval) * 60 * 20;
+            getServer().getScheduler().runTaskTimerAsynchronously(getInstance(), new UnlinkedMessageRunnable(instance), unlinkedMessageInterval, unlinkedMessageInterval);
+        }
     }
 
     @Override
