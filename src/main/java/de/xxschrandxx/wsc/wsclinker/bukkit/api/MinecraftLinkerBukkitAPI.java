@@ -11,7 +11,6 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import de.xxschrandxx.wsc.wscbridge.bukkit.api.MinecraftBridgeBukkitAPI;
-import de.xxschrandxx.wsc.wscbridge.core.api.MinecraftBridgeCoreAPI;
 import de.xxschrandxx.wsc.wscbridge.core.api.Response;
 import de.xxschrandxx.wsc.wsclinker.core.api.IMinecraftLinkerCoreAPI;
 import de.xxschrandxx.wsc.wsclinker.core.api.MinecraftLinkerCoreAPI;
@@ -23,8 +22,8 @@ public class MinecraftLinkerBukkitAPI extends MinecraftBridgeBukkitAPI implement
     protected final URL urlGetLinked;
     protected final URL urlGetUnlinked;
 
-    public MinecraftLinkerBukkitAPI(URL urlSendCode, URL urlUpdateNames, URL urlGetLinked, URL urlGetUnlinked, Logger logger, MinecraftBridgeCoreAPI api) {
-        super(api.getID(), api.getAuth(), logger, api.isDebugModeEnabled());
+    public MinecraftLinkerBukkitAPI(URL urlSendCode, URL urlUpdateNames, URL urlGetLinked, URL urlGetUnlinked, Logger logger, MinecraftBridgeBukkitAPI api) {
+        super(api, logger);
         this.urlSendCode = urlSendCode;
         this.urlUpdateNames = urlUpdateNames;
         this.urlGetLinked = urlGetLinked;
