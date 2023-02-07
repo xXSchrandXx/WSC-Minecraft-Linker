@@ -10,7 +10,7 @@ import de.xxschrandxx.wsc.wsclinker.bukkit.MinecraftLinkerBukkit;
 import de.xxschrandxx.wsc.wsclinker.bukkit.api.event.WSCLinkerConfigReloadEventBukkit;
 import de.xxschrandxx.wsc.wsclinker.core.MinecraftLinkerVars;
 
-public class WSCBridgeConfigReloadListenerBukkit implements Listener {
+public class WSCLinkerConfigReloadListenerBukkit implements Listener {
     @EventHandler
     public void onConfigReload(WSCBridgeConfigReloadEventBukkit event) {
         MinecraftLinkerBukkit instance = MinecraftLinkerBukkit.getInstance();

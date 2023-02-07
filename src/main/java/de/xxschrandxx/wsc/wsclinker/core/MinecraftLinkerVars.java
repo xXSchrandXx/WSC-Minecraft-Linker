@@ -1,5 +1,6 @@
 package de.xxschrandxx.wsc.wsclinker.core;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import de.xxschrandxx.wsc.wscbridge.core.api.configuration.AbstractConfiguration;
@@ -29,6 +30,12 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
         public static final String unlinkedMessageEnabled = "unlinkedMessage.enabled";
         // unlinkedMessage.interval
         public static final String unlinkedMessageInterval = "unlinkedMessage.interval";
+
+        // cmdalias
+        // cmdalias.enabled
+        public static final String cmdAliasEnabled = "cmdalias.enabled";
+        // cmdalias.aliases
+        public static final String cmdAliases = "cmdalias.aliases";
 
         // permission
         // permission.command.wsclinker
@@ -101,6 +108,12 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
         public static final Boolean unlinkedMessageEnabled = true;
         // unlinkedMessage.interval
         public static final Integer unlinkedMessageInterval = 5;
+
+        // cmdalias
+        // cmdalias.enabled
+        public static final Boolean cmdAliasEnabled = false;
+        // cmdalias.aliases
+        public static final List<String> cmdAliases = List.of("wsclinker", "wscl");
 
         // permission
         // permission.command.wsclinker

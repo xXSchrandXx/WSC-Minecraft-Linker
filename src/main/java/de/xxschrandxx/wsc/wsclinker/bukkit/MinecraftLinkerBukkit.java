@@ -21,6 +21,10 @@ import de.xxschrandxx.wsc.wsclinker.core.runnable.UpdateNamesRunnable;
 public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridgePlugin<MinecraftLinkerBukkitAPI> {
 
     // start of api part
+    public String getInfo() {
+        return null;
+    }
+
     private static MinecraftLinkerBukkit instance;
 
     public static MinecraftLinkerBukkit getInstance() {
@@ -97,9 +101,9 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
 
         // Load listener
         getLogger().log(Level.INFO, "Loading Listener.");
-        getServer().getPluginManager().registerEvents(new WSCBridgeConfigReloadListenerBukkit(), getInstance());
-        getServer().getPluginManager().registerEvents(new WSCBridgePluginReloadListenerBukkit(), getInstance());
-        getServer().getPluginManager().registerEvents(new AddModuleListenerBukkit(), getInstance());
+        getServer().getPluginManager().registerEvents(new WSCLinkerCommandAliasBukkit(), getInstance());
+        getServer().getPluginManager().registerEvents(new WSCLinkerConfigReloadListenerBukkit(), getInstance());
+        getServer().getPluginManager().registerEvents(new WSCLinkerPluginReloadListenerBukkit(), getInstance());
         getServer().getPluginManager().registerEvents(new AddModuleListenerBukkit(), getInstance());
 
         // Load commands

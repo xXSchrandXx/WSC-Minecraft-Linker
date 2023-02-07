@@ -7,7 +7,7 @@ import de.xxschrandxx.wsc.wsclinker.core.MinecraftLinkerVars;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
-public class WSCBridgePluginReloadListenerBungee implements Listener {
+public class WSCLinkerPluginReloadListenerBungee implements Listener {
     @EventHandler
     public void onPluginReload(WSCBridgePluginReloadEventBungee event) {
         MinecraftLinkerBungee instance = MinecraftLinkerBungee.getInstance();

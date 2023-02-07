@@ -13,10 +13,8 @@ import de.xxschrandxx.wsc.wscbridge.bungee.api.command.SenderBungee;
 import de.xxschrandxx.wsc.wscbridge.core.IMinecraftBridgePlugin;
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
 import de.xxschrandxx.wsc.wsclinker.bungee.api.MinecraftLinkerBungeeAPI;
-import de.xxschrandxx.wsc.wsclinker.bungee.commands.WSCLinkerBungee;
-import de.xxschrandxx.wsc.wsclinker.bungee.listener.AddModuleListenerBungee;
-import de.xxschrandxx.wsc.wsclinker.bungee.listener.WSCBridgeConfigReloadListenerBungee;
-import de.xxschrandxx.wsc.wsclinker.bungee.listener.WSCBridgePluginReloadListenerBungee;
+import de.xxschrandxx.wsc.wsclinker.bungee.commands.*;
+import de.xxschrandxx.wsc.wsclinker.bungee.listener.*;
 import de.xxschrandxx.wsc.wsclinker.core.MinecraftLinkerVars;
 import de.xxschrandxx.wsc.wsclinker.core.runnable.UnlinkedMessageRunnable;
 import de.xxschrandxx.wsc.wsclinker.core.runnable.UpdateNamesRunnable;
@@ -27,6 +25,10 @@ import net.md_5.bungee.config.YamlConfiguration;
 public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlugin<MinecraftLinkerBungeeAPI> {
 
     // start of api part
+    public String getInfo() {
+        return null;
+    }
+
     private static MinecraftLinkerBungee instance;
 
     public static MinecraftLinkerBungee getInstance() {
@@ -104,8 +106,9 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
 
         // Load listener
         getLogger().log(Level.INFO, "Loading Listener.");
-        getProxy().getPluginManager().registerListener(getInstance(), new WSCBridgeConfigReloadListenerBungee());
-        getProxy().getPluginManager().registerListener(getInstance(), new WSCBridgePluginReloadListenerBungee());
+        getProxy().getPluginManager().registerListener(getInstance(), new WSCLinkerCommandAliasBungee());
+        getProxy().getPluginManager().registerListener(getInstance(), new WSCLinkerConfigReloadListenerBungee());
+        getProxy().getPluginManager().registerListener(getInstance(), new WSCLinkerPluginReloadListenerBungee());
         getProxy().getPluginManager().registerListener(getInstance(), new AddModuleListenerBungee());
 
         // load commands
