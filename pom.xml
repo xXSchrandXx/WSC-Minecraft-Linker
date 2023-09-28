@@ -6,7 +6,7 @@
 
 	<groupId>de.xxschrandxx.wsc</groupId>
 	<artifactId>wsclinker</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.3</version>
 
 	<name>WSC-Minecraft-Linker</name>
 	<url>https://github.com/xXSchrandXx/WSC-Minecraft-Linker</url>
@@ -30,20 +30,20 @@
 		<dependency>
 			<groupId>org.spigotmc</groupId>
 			<artifactId>spigot-api</artifactId>
-			<version>1.16.5-R0.1-SNAPSHOT</version>
+			<version>1.20.1-R0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- Bungee Dep -->
 		<dependency>
 			<groupId>net.md-5</groupId>
 			<artifactId>bungeecord-api</artifactId>
-			<version>1.16-R0.4</version>
+			<version>1.20-R0.1</version>
 		</dependency>
 		<!-- WSC-Minecraft-Bridge -->
 		<dependency>
 			<groupId>de.xxschrandxx.wsc</groupId>
 			<artifactId>wscbridge</artifactId>
-			<version>2.0.3</version>
+			<version>2.0.4</version>
 		</dependency>
 	</dependencies>
 

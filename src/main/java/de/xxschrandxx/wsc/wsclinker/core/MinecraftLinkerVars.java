@@ -91,7 +91,7 @@ public class MinecraftLinkerVars extends AbstractConfiguration {
     public static final class defaults {
         // universal
         // url.sendCode
-        public static final String urlSendCode = "https://example.domain/index.php?minecraft-linker-code//";
+        public static final String urlSendCode = "https://example.domain/index.php?minecraft-linker-code/";
         // url.updateNames
         public static final String urlUpdateNames = "https://example.domain/index.php?minecraft-linker-update-name/";
         // url.getLinked
