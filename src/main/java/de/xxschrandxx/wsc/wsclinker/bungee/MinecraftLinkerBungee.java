@@ -43,32 +43,32 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
         String urlSendCodeString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlSendCode);
         URL urlSendCode;
         try {
-            urlSendCode = new URI(urlSendCodeString).toURL();
-        } catch (URISyntaxException | MalformedURLException e) {
+            urlSendCode = URI.create(urlSendCodeString).toURL();
+        } catch (MalformedURLException e) {
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
         String urlUpdateNamesString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlUpdateNames);
         URL urlUpdateNames;
         try {
-            urlUpdateNames = new URI(urlUpdateNamesString).toURL();
-        } catch (URISyntaxException | MalformedURLException e) {
+            urlUpdateNames = URI.create(urlUpdateNamesString).toURL();
+        } catch (MalformedURLException e) {
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
         String urlGetLinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetLinked);
         URL urlGetLinked;
         try {
-            urlGetLinked = new URI(urlGetLinkedString).toURL();
-        } catch (URISyntaxException | MalformedURLException e) {
+            urlGetLinked = URI.create(urlGetLinkedString).toURL();
+        } catch (MalformedURLException e) {
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
         String urlGetUnlinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetUnlinked);
         URL urlGetUnlinked;
         try {
-            urlGetUnlinked = new URI(urlGetUnlinkedString).toURL();
-        } catch (URISyntaxException | MalformedURLException e) {
+            urlGetUnlinked = URI.create(urlGetUnlinkedString).toURL();
+        } catch (MalformedURLException e) {
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
