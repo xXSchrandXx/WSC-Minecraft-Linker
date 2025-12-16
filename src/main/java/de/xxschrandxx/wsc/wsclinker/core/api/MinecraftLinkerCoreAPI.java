@@ -49,6 +49,7 @@ public class MinecraftLinkerCoreAPI {
             }
             return uuids;
         }
+        @SuppressWarnings("unchecked")
         ArrayList<String> uuidsArray = (ArrayList<String>) uuidsObject;
         for (String uuidString : uuidsArray) {
             try {
@@ -85,6 +86,7 @@ public class MinecraftLinkerCoreAPI {
             }
             return uuids;
         }
+        @SuppressWarnings("unchecked")
         ArrayList<String> uuidsArray = (ArrayList<String>) uuidsObject;
         for (String uuidString : uuidsArray) {
             try {
