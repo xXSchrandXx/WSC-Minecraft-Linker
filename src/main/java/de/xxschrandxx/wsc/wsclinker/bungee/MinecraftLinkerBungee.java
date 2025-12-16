@@ -3,6 +3,8 @@ package de.xxschrandxx.wsc.wsclinker.bungee;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -41,32 +43,32 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
         String urlSendCodeString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlSendCode);
         URL urlSendCode;
         try {
-            urlSendCode = new URL(urlSendCodeString);
-        } catch (MalformedURLException e) {
+            urlSendCode = new URI(urlSendCodeString).toURL();
+        } catch (URISyntaxException | MalformedURLException e) {
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
         String urlUpdateNamesString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlUpdateNames);
         URL urlUpdateNames;
         try {
-            urlUpdateNames = new URL(urlUpdateNamesString);
-        } catch (MalformedURLException e) {
+            urlUpdateNames = new URI(urlUpdateNamesString).toURL();
+        } catch (URISyntaxException | MalformedURLException e) {
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
         String urlGetLinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetLinked);
         URL urlGetLinked;
         try {
-            urlGetLinked = new URL(urlGetLinkedString);
-        } catch (MalformedURLException e) {
+            urlGetLinked = new URI(urlGetLinkedString).toURL();
+        } catch (URISyntaxException | MalformedURLException e) {
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
         String urlGetUnlinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetUnlinked);
         URL urlGetUnlinked;
         try {
-            urlGetUnlinked = new URL(urlGetUnlinkedString);
-        } catch (MalformedURLException e) {
+            urlGetUnlinked = new URI(urlGetUnlinkedString).toURL();
+        } catch (URISyntaxException | MalformedURLException e) {
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
