@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import de.xxschrandxx.wsc.wscbridge.core.IMinecraftBridgePlugin;
+import de.xxschrandxx.wsc.wscbridge.core.IBridgePlugin;
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
-import de.xxschrandxx.wsc.wsclinker.core.api.IMinecraftLinkerCoreAPI;
+import de.xxschrandxx.wsc.wsclinker.core.api.ILinkerCoreAPI;
 
 public class UpdateNamesRunnable implements Runnable {
-    private IMinecraftBridgePlugin<? extends IMinecraftLinkerCoreAPI> instance;
+    private IBridgePlugin<? extends ILinkerCoreAPI> instance;
 
-    public UpdateNamesRunnable(IMinecraftBridgePlugin<? extends IMinecraftLinkerCoreAPI> instance) {
+    public UpdateNamesRunnable(IBridgePlugin<? extends ILinkerCoreAPI> instance) {
         this.instance = instance;
     }
     public void run() {

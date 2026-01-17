@@ -10,16 +10,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 import de.xxschrandxx.wsc.wscbridge.bukkit.MinecraftBridgeBukkit;
 import de.xxschrandxx.wsc.wscbridge.bukkit.api.ConfigurationBukkit;
 import de.xxschrandxx.wsc.wscbridge.bukkit.api.command.SenderBukkit;
-import de.xxschrandxx.wsc.wscbridge.core.IMinecraftBridgePlugin;
+import de.xxschrandxx.wsc.wscbridge.core.IBridgePlugin;
+import de.xxschrandxx.wsc.wscbridge.core.api.MinecraftBridgeLogger;
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
 import de.xxschrandxx.wsc.wsclinker.bukkit.api.MinecraftLinkerBukkitAPI;
 import de.xxschrandxx.wsc.wsclinker.bukkit.commands.*;
 import de.xxschrandxx.wsc.wsclinker.bukkit.listener.*;
-import de.xxschrandxx.wsc.wsclinker.core.MinecraftLinkerVars;
+import de.xxschrandxx.wsc.wsclinker.core.LinkerVars;
 import de.xxschrandxx.wsc.wsclinker.core.runnable.UnlinkedMessageRunnable;
 import de.xxschrandxx.wsc.wsclinker.core.runnable.UpdateNamesRunnable;
 
-public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridgePlugin<MinecraftLinkerBukkitAPI> {
+public class MinecraftLinkerBukkit extends JavaPlugin implements IBridgePlugin<MinecraftLinkerBukkitAPI> {
 
     // start of api part
     public String getInfo() {
@@ -34,8 +35,15 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
 
     private MinecraftLinkerBukkitAPI api;
 
+    private MinecraftBridgeLogger bridgeLogger;
+
+    @Override
+    public MinecraftBridgeLogger getBridgeLogger() {
+        return bridgeLogger;
+    }
+
     public void loadAPI(ISender<?> sender) {
-        String urlSendCodeString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlSendCode);
+        String urlSendCodeString = getConfiguration().getString(LinkerVars.Configuration.urlSendCode);
         URL urlSendCode;
         try {
             urlSendCode = URI.create(urlSendCodeString).toURL();
@@ -43,7 +51,7 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
-        String urlUpdateNamesString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlUpdateNames);
+        String urlUpdateNamesString = getConfiguration().getString(LinkerVars.Configuration.urlUpdateNames);
         URL urlUpdateNames;
         try {
             urlUpdateNames = URI.create(urlUpdateNamesString).toURL();
@@ -51,7 +59,7 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
-        String urlGetLinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetLinked);
+        String urlGetLinkedString = getConfiguration().getString(LinkerVars.Configuration.urlGetLinked);
         URL urlGetLinked;
         try {
             urlGetLinked = URI.create(urlGetLinkedString).toURL();
@@ -59,7 +67,7 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
-        String urlGetUnlinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetUnlinked);
+        String urlGetUnlinkedString = getConfiguration().getString(LinkerVars.Configuration.urlGetUnlinked);
         URL urlGetUnlinked;
         try {
             urlGetUnlinked = URI.create(urlGetUnlinkedString).toURL();
@@ -73,7 +81,7 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
             urlUpdateNames,
             urlGetLinked,
             urlGetUnlinked,
-            getLogger(),
+            getBridgeLogger(),
             wsc.getAPI()
         );
     }
@@ -86,6 +94,7 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
     @Override
     public void onEnable() {
         instance = this;
+        bridgeLogger = new MinecraftBridgeLogger(getLogger());
 
         // Load configuration
         getLogger().log(Level.INFO, "Loading Configuration.");
@@ -113,12 +122,12 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
 
         // load runnable
         getLogger().log(Level.INFO, "Loading Runnables.");
-        if (getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.updateNamesEnabled)) {
-            Integer updateNamesInterval = getConfiguration().getInt(MinecraftLinkerVars.Configuration.updateNamesInterval) * 60 * 20;
+        if (getConfiguration().getBoolean(LinkerVars.Configuration.updateNamesEnabled)) {
+            Integer updateNamesInterval = getConfiguration().getInt(LinkerVars.Configuration.updateNamesInterval) * 60 * 20;
             getServer().getScheduler().runTaskTimerAsynchronously(getInstance(), new UpdateNamesRunnable(instance), updateNamesInterval, updateNamesInterval);
         }
-        if (getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.unlinkedMessageEnabled)) {
-            Integer unlinkedMessageInterval = getConfiguration().getInt(MinecraftLinkerVars.Configuration.unlinkedMessageInterval) * 60 * 20;
+        if (getConfiguration().getBoolean(LinkerVars.Configuration.unlinkedMessageEnabled)) {
+            Integer unlinkedMessageInterval = getConfiguration().getInt(LinkerVars.Configuration.unlinkedMessageInterval) * 60 * 20;
             getServer().getScheduler().runTaskTimerAsynchronously(getInstance(), new UnlinkedMessageRunnable(instance), unlinkedMessageInterval, unlinkedMessageInterval);
         }
     }
@@ -136,7 +145,7 @@ public class MinecraftLinkerBukkit extends JavaPlugin implements IMinecraftBridg
     public boolean reloadConfiguration(ISender<?> sender) {
         reloadConfig();
 
-        if (MinecraftLinkerVars.startConfig(getConfiguration(), getLogger())) {
+        if (LinkerVars.startConfig(getConfiguration(), getBridgeLogger())) {
             if (!saveConfiguration()) {
                 return false;
             }

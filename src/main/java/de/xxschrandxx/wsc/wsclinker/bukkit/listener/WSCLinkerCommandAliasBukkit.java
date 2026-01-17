@@ -9,7 +9,7 @@ import org.bukkit.event.server.ServerCommandEvent;
 
 import de.xxschrandxx.wsc.wscbridge.bukkit.api.command.SenderBukkit;
 import de.xxschrandxx.wsc.wsclinker.bukkit.MinecraftLinkerBukkit;
-import de.xxschrandxx.wsc.wsclinker.core.MinecraftLinkerVars;
+import de.xxschrandxx.wsc.wsclinker.core.LinkerVars;
 import de.xxschrandxx.wsc.wsclinker.core.commands.WSCLinker;
 
 public class WSCLinkerCommandAliasBukkit implements Listener {
@@ -19,13 +19,13 @@ public class WSCLinkerCommandAliasBukkit implements Listener {
             return;
         }
         MinecraftLinkerBukkit instance = MinecraftLinkerBukkit.getInstance();
-        if (!instance.getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.cmdAliasEnabled)) {
+        if (!instance.getConfiguration().getBoolean(LinkerVars.Configuration.cmdAliasEnabled)) {
             return;
         }
 
         String[] split = event.getCommand().split(" ");
         String command = split[0];
-        if (!instance.getConfiguration().getStringList(MinecraftLinkerVars.Configuration.cmdAliases).contains(command.toLowerCase())) {
+        if (!instance.getConfiguration().getStringList(LinkerVars.Configuration.cmdAliases).contains(command.toLowerCase())) {
             return;
         }
         String[] args = {};
@@ -43,13 +43,13 @@ public class WSCLinkerCommandAliasBukkit implements Listener {
             return;
         }
         MinecraftLinkerBukkit instance = MinecraftLinkerBukkit.getInstance();
-        if (!instance.getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.cmdAliasEnabled)) {
+        if (!instance.getConfiguration().getBoolean(LinkerVars.Configuration.cmdAliasEnabled)) {
             return;
         }
 
         String[] split = event.getMessage().split(" ");
         String command = split[0].replaceFirst("/", "");
-        if (!instance.getConfiguration().getStringList(MinecraftLinkerVars.Configuration.cmdAliases).contains(command.toLowerCase())) {
+        if (!instance.getConfiguration().getStringList(LinkerVars.Configuration.cmdAliases).contains(command.toLowerCase())) {
             return;
         }
         String[] args = {};

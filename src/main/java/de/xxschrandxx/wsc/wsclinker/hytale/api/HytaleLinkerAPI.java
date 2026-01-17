@@ -1,4 +1,4 @@
-package de.xxschrandxx.wsc.wsclinker.bukkit.api;
+package de.xxschrandxx.wsc.wsclinker.hytale.api;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -9,20 +9,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
-import de.xxschrandxx.wsc.wscbridge.bukkit.api.MinecraftBridgeBukkitAPI;
-import de.xxschrandxx.wsc.wscbridge.core.api.MinecraftBridgeLogger;
 import de.xxschrandxx.wsc.wscbridge.core.api.Response;
+import de.xxschrandxx.wsc.wscbridge.hytale.api.HytaleBridgeAPI;
+import de.xxschrandxx.wsc.wscbridge.hytale.api.HytaleBridgeLogger;
 import de.xxschrandxx.wsc.wsclinker.core.api.ILinkerCoreAPI;
 import de.xxschrandxx.wsc.wsclinker.core.api.LinkerCoreAPI;
 
-public class MinecraftLinkerBukkitAPI extends MinecraftBridgeBukkitAPI implements ILinkerCoreAPI {
+public class HytaleLinkerAPI extends HytaleBridgeAPI implements ILinkerCoreAPI {
 
     protected final URL urlSendCode;
     protected final URL urlUpdateNames;
     protected final URL urlGetLinked;
     protected final URL urlGetUnlinked;
 
-    public MinecraftLinkerBukkitAPI(URL urlSendCode, URL urlUpdateNames, URL urlGetLinked, URL urlGetUnlinked, MinecraftBridgeLogger logger, MinecraftBridgeBukkitAPI api) {
+    public HytaleLinkerAPI(URL urlSendCode, URL urlUpdateNames, URL urlGetLinked, URL urlGetUnlinked, HytaleBridgeLogger logger, HytaleBridgeAPI api) {
         super(api, logger);
         this.urlSendCode = urlSendCode;
         this.urlUpdateNames = urlUpdateNames;

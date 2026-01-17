@@ -8,21 +8,21 @@ import java.net.UnknownServiceException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 import de.xxschrandxx.wsc.wscbridge.bungee.api.MinecraftBridgeBungeeAPI;
+import de.xxschrandxx.wsc.wscbridge.core.api.MinecraftBridgeLogger;
 import de.xxschrandxx.wsc.wscbridge.core.api.Response;
-import de.xxschrandxx.wsc.wsclinker.core.api.IMinecraftLinkerCoreAPI;
-import de.xxschrandxx.wsc.wsclinker.core.api.MinecraftLinkerCoreAPI;
+import de.xxschrandxx.wsc.wsclinker.core.api.ILinkerCoreAPI;
+import de.xxschrandxx.wsc.wsclinker.core.api.LinkerCoreAPI;
 
-public class MinecraftLinkerBungeeAPI extends MinecraftBridgeBungeeAPI implements IMinecraftLinkerCoreAPI {
+public class MinecraftLinkerBungeeAPI extends MinecraftBridgeBungeeAPI implements ILinkerCoreAPI {
 
     protected final URL urlSendCode;
     protected final URL urlUpdateNames;
     protected final URL urlGetLinked;
     protected final URL urlGetUnlinked;
 
-    public MinecraftLinkerBungeeAPI(URL urlSendCode, URL urlUpdateNames, URL urlGetLinked, URL urlGetUnlinked, Logger logger, MinecraftBridgeBungeeAPI api) {
+    public MinecraftLinkerBungeeAPI(URL urlSendCode, URL urlUpdateNames, URL urlGetLinked, URL urlGetUnlinked, MinecraftBridgeLogger logger, MinecraftBridgeBungeeAPI api) {
         super(api, logger);
         this.urlSendCode = urlSendCode;
         this.urlUpdateNames = urlUpdateNames;
@@ -31,18 +31,18 @@ public class MinecraftLinkerBungeeAPI extends MinecraftBridgeBungeeAPI implement
     }
 
     public Response<String, Object> sendCode(UUID uuid, String name) throws SocketTimeoutException, MalformedURLException, UnknownServiceException, IOException {
-        return MinecraftLinkerCoreAPI.sendCode(this, urlSendCode, uuid, name);
+        return LinkerCoreAPI.sendCode(this, urlSendCode, uuid, name);
     }
 
     public Response<String, Object> sendNames(HashMap<UUID, HashMap<String, String>> uuids) throws MalformedURLException, UnknownServiceException, SocketTimeoutException, IOException {
-        return MinecraftLinkerCoreAPI.sendNames(this, urlUpdateNames, uuids);
+        return LinkerCoreAPI.sendNames(this, urlUpdateNames, uuids);
     }
 
     public ArrayList<UUID> getUnlinkedUUIDs() throws MalformedURLException, UnknownServiceException, SocketTimeoutException, IOException {
-        return MinecraftLinkerCoreAPI.getUnlinkedUUIDs(this, urlGetUnlinked);
+        return LinkerCoreAPI.getUnlinkedUUIDs(this, urlGetUnlinked);
     }
 
     public ArrayList<UUID> getLinkedUUIDs() throws MalformedURLException, UnknownServiceException, SocketTimeoutException, IOException {
-        return MinecraftLinkerCoreAPI.getLinkedUUIDs(this, urlGetLinked);
+        return LinkerCoreAPI.getLinkedUUIDs(this, urlGetLinked);
     }
 }

@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import de.xxschrandxx.wsc.wscbridge.core.IMinecraftBridgePlugin;
+import de.xxschrandxx.wsc.wscbridge.core.IBridgePlugin;
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
-import de.xxschrandxx.wsc.wsclinker.core.MinecraftLinkerVars;
-import de.xxschrandxx.wsc.wsclinker.core.api.IMinecraftLinkerCoreAPI;
+import de.xxschrandxx.wsc.wsclinker.core.LinkerVars;
+import de.xxschrandxx.wsc.wsclinker.core.api.ILinkerCoreAPI;
 
 public class UnlinkedMessageRunnable  implements Runnable {
-    private IMinecraftBridgePlugin<? extends IMinecraftLinkerCoreAPI> instance;
+    private IBridgePlugin<? extends ILinkerCoreAPI> instance;
 
-    public UnlinkedMessageRunnable(IMinecraftBridgePlugin<? extends IMinecraftLinkerCoreAPI> instance) {
+    public UnlinkedMessageRunnable(IBridgePlugin<? extends ILinkerCoreAPI> instance) {
         this.instance = instance;
     }
     public void run() {
@@ -35,9 +35,9 @@ public class UnlinkedMessageRunnable  implements Runnable {
             if (linked.contains(sender.getUniqueId())) {
                 continue;
             }
-            String message = instance.getConfiguration().getString(MinecraftLinkerVars.Configuration.LangUnlinkedMessageText);
-            String hover = instance.getConfiguration().getString(MinecraftLinkerVars.Configuration.LangUnlinkedMessageHover);
-            String click = instance.getConfiguration().getString(MinecraftLinkerVars.Configuration.LangUnlinkedMessageUrl);
+            String message = instance.getConfiguration().getString(LinkerVars.Configuration.LangUnlinkedMessageText);
+            String hover = instance.getConfiguration().getString(LinkerVars.Configuration.LangUnlinkedMessageHover);
+            String click = instance.getConfiguration().getString(LinkerVars.Configuration.LangUnlinkedMessageUrl);
             sender.sendMessage(message, hover, click);
         }
     }

@@ -1,0 +1,16 @@
+{
+  "Group": "WSC-Hytale",
+  "Name": "WSC-Hytale-Linker",
+  "Version": "${project.version}",
+  "Description": "WSC-Hytale-Linker",
+  "Authors": [{"Name": "xXSchrandXx"}],
+  "Website": "https://github.com/xXSchrandXx/WSC-Minecraft-Linker",
+  "ServerVersion": "*",
+  "Dependencies": {
+    "WSC-Hytale:WSC-Hytale-Bridge": "3.0.0"
+  },
+  "OptionalDependencies": {},
+  "DisabledByDefault": false,
+  "Main": "${project.groupId}.${project.artifactId}.hytale.HytaleLinker",
+  "IncludesAssetPack": false
+}

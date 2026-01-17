@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import de.xxschrandxx.wsc.wscbridge.bungee.api.command.SenderBungee;
 import de.xxschrandxx.wsc.wsclinker.bungee.MinecraftLinkerBungee;
-import de.xxschrandxx.wsc.wsclinker.core.MinecraftLinkerVars;
+import de.xxschrandxx.wsc.wsclinker.core.LinkerVars;
 import de.xxschrandxx.wsc.wsclinker.core.commands.WSCLinker;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.event.ChatEvent;
@@ -15,7 +15,7 @@ public class WSCLinkerCommandAliasBungee implements Listener {
     @EventHandler
     public void onCommand(ChatEvent event) {
         MinecraftLinkerBungee instance = MinecraftLinkerBungee.getInstance();
-        if (!instance.getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.cmdAliasEnabled)) {
+        if (!instance.getConfiguration().getBoolean(LinkerVars.Configuration.cmdAliasEnabled)) {
             return;
         }
 
@@ -25,7 +25,7 @@ public class WSCLinkerCommandAliasBungee implements Listener {
 
         String[] split = event.getMessage().split(" ");
         String command = split[0].replaceFirst("/", "");
-        if (!instance.getConfiguration().getStringList(MinecraftLinkerVars.Configuration.cmdAliases).contains(command.toLowerCase())) {
+        if (!instance.getConfiguration().getStringList(LinkerVars.Configuration.cmdAliases).contains(command.toLowerCase())) {
             return;
         }
         String[] args = {};

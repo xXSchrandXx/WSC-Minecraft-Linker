@@ -11,19 +11,20 @@ import java.util.logging.Level;
 import de.xxschrandxx.wsc.wscbridge.bungee.MinecraftBridgeBungee;
 import de.xxschrandxx.wsc.wscbridge.bungee.api.ConfigurationBungee;
 import de.xxschrandxx.wsc.wscbridge.bungee.api.command.SenderBungee;
-import de.xxschrandxx.wsc.wscbridge.core.IMinecraftBridgePlugin;
+import de.xxschrandxx.wsc.wscbridge.core.IBridgePlugin;
+import de.xxschrandxx.wsc.wscbridge.core.api.MinecraftBridgeLogger;
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
 import de.xxschrandxx.wsc.wsclinker.bungee.api.MinecraftLinkerBungeeAPI;
 import de.xxschrandxx.wsc.wsclinker.bungee.commands.*;
 import de.xxschrandxx.wsc.wsclinker.bungee.listener.*;
-import de.xxschrandxx.wsc.wsclinker.core.MinecraftLinkerVars;
+import de.xxschrandxx.wsc.wsclinker.core.LinkerVars;
 import de.xxschrandxx.wsc.wsclinker.core.runnable.UnlinkedMessageRunnable;
 import de.xxschrandxx.wsc.wsclinker.core.runnable.UpdateNamesRunnable;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
-public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlugin<MinecraftLinkerBungeeAPI> {
+public class MinecraftLinkerBungee extends Plugin implements IBridgePlugin<MinecraftLinkerBungeeAPI> {
 
     // start of api part
     public String getInfo() {
@@ -38,8 +39,15 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
 
     private MinecraftLinkerBungeeAPI api;
 
+    private MinecraftBridgeLogger bridgeLogger;
+
+    @Override
+    public MinecraftBridgeLogger getBridgeLogger() {
+        return bridgeLogger;
+    }
+
     public void loadAPI(ISender<?> sender) {
-        String urlSendCodeString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlSendCode);
+        String urlSendCodeString = getConfiguration().getString(LinkerVars.Configuration.urlSendCode);
         URL urlSendCode;
         try {
             urlSendCode = URI.create(urlSendCodeString).toURL();
@@ -47,7 +55,7 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
-        String urlUpdateNamesString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlUpdateNames);
+        String urlUpdateNamesString = getConfiguration().getString(LinkerVars.Configuration.urlUpdateNames);
         URL urlUpdateNames;
         try {
             urlUpdateNames = URI.create(urlUpdateNamesString).toURL();
@@ -55,7 +63,7 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
-        String urlGetLinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetLinked);
+        String urlGetLinkedString = getConfiguration().getString(LinkerVars.Configuration.urlGetLinked);
         URL urlGetLinked;
         try {
             urlGetLinked = URI.create(urlGetLinkedString).toURL();
@@ -63,7 +71,7 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
             getLogger().log(Level.INFO, "Could not load api, disabeling plugin!.", e);
             return;
         }
-        String urlGetUnlinkedString = getConfiguration().getString(MinecraftLinkerVars.Configuration.urlGetUnlinked);
+        String urlGetUnlinkedString = getConfiguration().getString(LinkerVars.Configuration.urlGetUnlinked);
         URL urlGetUnlinked;
         try {
             urlGetUnlinked = URI.create(urlGetUnlinkedString).toURL();
@@ -77,7 +85,7 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
             urlUpdateNames,
             urlGetLinked,
             urlGetUnlinked,
-            getLogger(),
+            getBridgeLogger(),
             wsc.getAPI()
         );
     }
@@ -91,6 +99,7 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
     @Override
     public void onEnable() {
         instance = this;
+        bridgeLogger = new MinecraftBridgeLogger(getLogger());
 
         // Load configuration
         getLogger().log(Level.INFO, "Loading Configuration.");
@@ -118,12 +127,12 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
 
         // load runnable
         getLogger().log(Level.INFO, "Loading Runnables.");
-        if (getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.updateNamesEnabled)) {
-            Integer updateNamesInterval = getConfiguration().getInt(MinecraftLinkerVars.Configuration.updateNamesInterval);
+        if (getConfiguration().getBoolean(LinkerVars.Configuration.updateNamesEnabled)) {
+            Integer updateNamesInterval = getConfiguration().getInt(LinkerVars.Configuration.updateNamesInterval);
             getProxy().getScheduler().schedule(getInstance(), new UpdateNamesRunnable(instance), updateNamesInterval, updateNamesInterval, TimeUnit.MINUTES);
         }
-        if (getConfiguration().getBoolean(MinecraftLinkerVars.Configuration.unlinkedMessageEnabled)) {
-            Integer unlinkedMessageInterval = getConfiguration().getInt(MinecraftLinkerVars.Configuration.unlinkedMessageInterval);
+        if (getConfiguration().getBoolean(LinkerVars.Configuration.unlinkedMessageEnabled)) {
+            Integer unlinkedMessageInterval = getConfiguration().getInt(LinkerVars.Configuration.unlinkedMessageInterval);
             getProxy().getScheduler().schedule(getInstance(), new UnlinkedMessageRunnable(instance), unlinkedMessageInterval, unlinkedMessageInterval, TimeUnit.MINUTES);
         }
     }
@@ -165,7 +174,7 @@ public class MinecraftLinkerBungee extends Plugin implements IMinecraftBridgePlu
             config = new ConfigurationBungee();
         }
 
-        if (MinecraftLinkerVars.startConfig(getConfiguration(), getLogger())) {
+        if (LinkerVars.startConfig(getConfiguration(), getBridgeLogger())) {
             if (!saveConfiguration()) {
                 return false;
             }
