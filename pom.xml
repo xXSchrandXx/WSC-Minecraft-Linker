@@ -6,9 +6,9 @@
 
 	<groupId>de.xxschrandxx.wsc</groupId>
 	<artifactId>wsclinker</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 
-	<name>WSC-Minecraft-Linker</name>
+	<name>WSC-Linker</name>
 	<url>https://github.com/xXSchrandXx/WSC-Minecraft-Linker</url>
 
 	<properties>

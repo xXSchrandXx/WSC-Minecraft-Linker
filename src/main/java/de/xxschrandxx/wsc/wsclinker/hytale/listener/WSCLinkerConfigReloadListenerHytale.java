@@ -1,10 +1,7 @@
 package de.xxschrandxx.wsc.wsclinker.hytale.listener;
 
-import com.hypixel.hytale.server.core.HytaleServer;
-
 import de.xxschrandxx.wsc.wscbridge.hytale.api.event.WSCBridgeConfigReloadEventHytale;
 import de.xxschrandxx.wsc.wsclinker.hytale.HytaleLinker;
-import de.xxschrandxx.wsc.wsclinker.hytale.api.event.WSCLinkerConfigReloadEventHytale;
 import de.xxschrandxx.wsc.wsclinker.core.LinkerVars;
 
 public class WSCLinkerConfigReloadListenerHytale {
@@ -20,6 +17,5 @@ public class WSCLinkerConfigReloadListenerHytale {
         }
         String configSuccess = instance.getConfiguration().getString(LinkerVars.Configuration.LangCmdReloadConfigSuccess);
         event.getSender().sendMessage(configSuccess);
-        HytaleServer.get().getEventBus().dispatchFor(WSCLinkerConfigReloadEventHytale.class).dispatch(new WSCLinkerConfigReloadEventHytale(event.getSender()));
     }
 }

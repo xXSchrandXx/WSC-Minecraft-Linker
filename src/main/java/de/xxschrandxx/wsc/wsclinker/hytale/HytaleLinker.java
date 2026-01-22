@@ -31,6 +31,8 @@ import de.xxschrandxx.wsc.wscbridge.hytale.api.event.WSCBridgePluginReloadEventH
 import de.xxschrandxx.wsc.wscbridge.core.IBridgePlugin;
 import de.xxschrandxx.wsc.wscbridge.core.api.command.ISender;
 import de.xxschrandxx.wsc.wsclinker.hytale.api.HytaleLinkerAPI;
+import de.xxschrandxx.wsc.wsclinker.hytale.api.event.WSCLinkerConfigReloadEventHytale;
+import de.xxschrandxx.wsc.wsclinker.hytale.api.event.WSCLinkerPluginReloadEventHytale;
 import de.xxschrandxx.wsc.wsclinker.hytale.commands.*;
 import de.xxschrandxx.wsc.wsclinker.hytale.listener.*;
 import de.xxschrandxx.wsc.wsclinker.core.LinkerVars;
@@ -100,6 +102,7 @@ public class HytaleLinker extends JavaPlugin implements IBridgePlugin<HytaleLink
             getBridgeLogger(),
             wsc.getAPI()
         );
+        HytaleServer.get().getEventBus().dispatchFor(WSCLinkerPluginReloadEventHytale.class).dispatch(new WSCLinkerPluginReloadEventHytale(sender));
     }
 
     public HytaleLinkerAPI getAPI() {
@@ -211,7 +214,7 @@ public class HytaleLinker extends JavaPlugin implements IBridgePlugin<HytaleLink
             }
             return reloadConfiguration(sender);
         }
-        HytaleServer.get().getEventBus().dispatchFor(WSCBridgeConfigReloadEventHytale.class).dispatch(new WSCBridgeConfigReloadEventHytale(sender));
+        HytaleServer.get().getEventBus().dispatchFor(WSCLinkerConfigReloadEventHytale.class).dispatch(new WSCLinkerConfigReloadEventHytale(sender));
         return true;
     }
 
