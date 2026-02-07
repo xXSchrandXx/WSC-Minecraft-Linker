@@ -6,7 +6,7 @@
 
 	<groupId>de.xxschrandxx.wsc</groupId>
 	<artifactId>wsclinker</artifactId>
-	<version>1.0.5</version>
+	<version>1.0.6</version>
 
 	<name>WSC-Linker</name>
 	<url>https://github.com/xXSchrandXx/WSC-Minecraft-Linker</url>
@@ -54,7 +54,7 @@
 		<dependency>
 			<groupId>de.xxschrandxx.wsc</groupId>
 			<artifactId>wscbridge</artifactId>
-			<version>3.0.0</version>
+			<version>3.0.2</version>
 		</dependency>
 	</dependencies>
 

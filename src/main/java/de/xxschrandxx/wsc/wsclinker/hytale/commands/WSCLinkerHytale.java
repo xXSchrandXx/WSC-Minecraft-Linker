@@ -36,4 +36,9 @@ public class WSCLinkerHytale extends AbstractCommand {
         new WSCLinker(instance).execute(s, argsWithoutFirst);
         return CompletableFuture.completedFuture(null);
     }
+
+    @Override
+    protected boolean canGeneratePermission() {
+        return false;
+    }
 }
